@@ -1,0 +1,50 @@
+﻿
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+
+navbar{
+    color:#f00;
+
+}
+a{
+    cursor:pointer;
+}
+#guarnicao{
+    color:#f00;
+    font-size:18px;
+    text-align:center;
+}
+#cardapio{
+    background-image:url(~/Content/Imagens/card.jpg);
+    
+    
+}
+

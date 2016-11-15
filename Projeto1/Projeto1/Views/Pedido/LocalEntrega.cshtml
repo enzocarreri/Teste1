@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "LocalEntrega";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LocalEntrega</h2>
+
+@foreach (Projeto1.Models.ModCliente item in Model)
+{
+    <div class="col-md-6">
+
+        <div class="panel-heading" role="tab" id="headingOne">
+
+            <a class="list-group-item collapsed">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Endereco: </label>
+                        <input type="text" class="form-control" value="@item.endereco" name="endereco"><br />
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Numero: </label>
+                        <input type="text" class="form-control" value="@item.numero" name="numero"><br />
+                    </div>
+                </div>
+            </a>
+            
+
+        </div>
+
+    </div>
+
+}

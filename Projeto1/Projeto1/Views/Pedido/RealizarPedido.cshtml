@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "RealizarPedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pedido</h2>
+
+<form class="form-inline" action="@Url.Action("FinalizarPedido", "Pedido")">
+    <div class="form-group">
+
+        <input type="hidden" name="item" value="@ViewBag.empresa">
+        <input type="hidden" name="cliente" value="@ViewBag.cliente">
+        <div class="col-md-12">
+
+            <div class="panel-heading" role="tab" id="headingOne">
+                @foreach (Projeto1.Models.ModOfereceProduto item in Model)
+                {
+                    <input type="hidden" name="item" value="@item.produto.codigoProduto">
+
+
+                    <a id=@item.produto.codigoProduto class="list-group-item collapsed">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Nome: </label>@item.produto.nomeProduto <br />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Valor: </label>@item.valor <br />
+                            </div>
+                            <input type="hidden" name="valor" value="@item.valor">
+
+                        </div>
+
+                    </a>
+
+
+
+                }
+            </div>
+            <br />
+        </div>
+        @Html.Action("LocalEntrega", "Pedido", new { cliente = ViewBag.Cliente })
+        @*@Html.Action("Sugestao", "Pedido", new { mistura = ViewBag.mistura })*@
+        <button class="btn btn-default">Pedir</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    ...
+                </div>
+            </div>
+        </div>
+
+
+</form>
