@@ -50,10 +50,12 @@ namespace Projeto1.Models.MSSQL
                 
                              
                 
-                query = "select  p.codigoproduto,o.valor,o.codigooferece, p.nomeproduto, t.descricao, t.codigotipo from produto p " +
+                query = "select  p.codigoproduto,o.valor,o.codigooferece, p.nomeproduto, t.descricao, t.codigotipo, o.codigooferece from produto p " +
                     "INNER JOIN tipoproduto t ON p.codtipoproduto = t.codigotipo " +
                     "INNER JOIN ofereceproduto o ON o.codproduto=p.codigoproduto " +
-                    "WHERE (" + query + ") and ( o.dia=3 and o.codempresa='"+Convert.ToInt32(empresa)+"') ORDER BY t.descricao";
+                //"WHERE (" + query + ") and ( o.dia=3 and o.codempresa='"+Convert.ToInt32(empresa)+"') ORDER BY t.descricao";
+                "WHERE (" + query + ") and ( o.dia=3 and o.codempresa='"+Convert.ToInt32(empresa)+"') ORDER BY field (t.descricao " +
+                " , '"+"prato"+ "','" + "principal" + "','" + "mistura" + "','" + "guarnicao" + "','" + "bebida" + "','" + "sobremesa" + "')";
 
 
                 MySqlCommand cmd = new MySqlCommand(query, conexao.conn);
@@ -91,16 +93,7 @@ namespace Projeto1.Models.MSSQL
             return oferece;
         }
 
-        private ModOfereceProduto read_Oferece(MySqlDataReader reader)
-        {
-            ModOfereceProduto o = new ModOfereceProduto();
-            o.codigoOferece = ConvertReader.ConverteInt(reader["codigooferece"]);
-            o.valor = ConvertReader.ConverteDouble(reader["valor"]);
 
-            o.produto = read_Produto(reader);
-
-            return o;
-        }
 
         internal List<ModItensPedidos> SugestaoBebida(string mistura)
         {
@@ -124,7 +117,7 @@ namespace Projeto1.Models.MSSQL
 
 
 
-                query = "select p.codigoproduto, p.nomeproduto, t.descricao, t.codigotipo, count(i.codigoItens) as 'contagem' " +
+                query = "select p.codigoproduto, p.nomeproduto, t.descricao, t.codigotipo, count(i.codigoItens) as 'contagem', o.valor, o.codigooferece  " +
                           " from produto p, empresa e, tipoproduto t, itenspedido i, pedido pe, ofereceproduto o " +
                           " WHERE p.codtipoproduto = t.codigotipo and p.codigoproduto = i.codProdutopedido " +
                           " and i.coditenspedido = pe.codigopedido and o.codproduto = p.codigoproduto " +
@@ -199,7 +192,7 @@ namespace Projeto1.Models.MSSQL
 
 
 
-               query =  "select p.codigoproduto, p.nomeproduto, t.descricao, t.codigotipo, count(i.codigoItens) as 'contagem' " +
+               query = "select p.codigoproduto, p.nomeproduto, t.descricao, t.codigotipo, count(i.codigoItens) as 'contagem', o.valor, o.codigooferece  " +
                          " from produto p, empresa e, tipoproduto t, itenspedido i, pedido pe, ofereceproduto o " +
                          " WHERE p.codtipoproduto = t.codigotipo and p.codigoproduto = i.codProdutopedido " +
                          " and i.coditenspedido = pe.codigopedido and o.codproduto = p.codigoproduto " +
@@ -258,7 +251,7 @@ namespace Projeto1.Models.MSSQL
             
 
             item.produto = read_Produto(reader);
-
+            item.oferece = read_Oferece(reader);
             return item;
         }
 
@@ -336,7 +329,7 @@ namespace Projeto1.Models.MSSQL
             return cliente;
         }
 
-        internal string FinalizarPedido(string pedido, string cliente, string endereco, string numero, string valor)
+        internal string FinalizarPedido(string pedido, string cliente, string endereco, string numero, string valor, string codBeb1, string valorBeb1, string codSobre1, string valorSobre1)
         {
             // Instancia nossos objetos
             List<ModPedido> itensPedido = new List<ModPedido>();
@@ -350,32 +343,68 @@ namespace Projeto1.Models.MSSQL
                 setMensagemErro(conexao.mErro);
                 return "erro";
             }
-
+            pedido = pedido + codBeb1 + codSobre1;
+            
+            
             try
             {
-                double valorfinal=0;
+                double valorfinal = 0;
                 int i;
-                for (i=1;i<valor.Length;i++)
+                valorfinal = Convert.ToDouble(valor.Substring(1, 2));
+                for (i = 2; i < valor.Length; i++)
                 {
                     valorfinal = valorfinal + Convert.ToDouble(valor.Substring(i, 1));
                 }
+               
+                if(!String.IsNullOrEmpty(codSobre1))
+                {
+                    if(!String.IsNullOrEmpty(codBeb1))
+                    {
+                        double val1 = Convert.ToDouble(valorBeb1);
+                        double val2 = Convert.ToDouble(valorSobre1);
+                        valorfinal = valorfinal + val1 + val2;
+                    }
+                    else
+                    {
+                        double val2 = Convert.ToDouble(valorSobre1);
+                        valorfinal = valorfinal + val2;
+                    }
+
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(codSobre1))
+                    {
+                        double val2 = Convert.ToDouble(valorSobre1);
+                        valorfinal = valorfinal + val2;
+                    }
+                    if (!String.IsNullOrEmpty(codBeb1))
+                    {
+                        double val1 = Convert.ToDouble(valorBeb1);
+                        valorfinal = valorfinal + val1;
+                    }
+
+                   
+                    
+                }
+
                 MySqlDataReader reader;
-                string query1 = "",query2="",query3="";
+                string query1 = "", query2 = "", query3 = "";
                 string empresa = "";
-               
-               
+
+
                 DateTime saveNow = DateTime.Now;
-                
+
                 empresa = pedido.Substring(0, 2);
-                query1 = "insert into pedido(codclientepedido,codempresapedido,datavenda, enderecoentrega,numeroentrega,valor) values (  '" + cliente + "', '" + empresa + "', now(), '"+endereco+"', '"+numero+ "', '" + valorfinal + "')";
-                
+                query1 = "insert into pedido(codclientepedido,codempresapedido,datavenda, enderecoentrega,numeroentrega,valor) values (  '" + Convert.ToInt32(cliente) + "', '" + Convert.ToInt32(empresa) + "', now(), '" + endereco + "', '" + numero + "', '" + valorfinal + "')";
+
 
                 query2 = "select codigopedido from pedido order by codigopedido desc limit 1";
-                
 
-                
 
-               
+
+
+
 
 
 
@@ -401,8 +430,13 @@ namespace Projeto1.Models.MSSQL
                     itensPedido.Add(read_Pedido(reader));
                     codigo = reader["codigopedido"].ToString();
                 }
+
+
+
+
                 i = 2;
                 reader.Dispose();
+
                 while (i < pedido.Length)
                 {
                     query3 = "INSERT INTO itenspedido (codprodutopedido,coditenspedido) values ( '" + Convert.ToInt32(pedido.Substring(i, 2)) + "', '" + Convert.ToInt32(codigo) + "' )";
@@ -411,8 +445,8 @@ namespace Projeto1.Models.MSSQL
                     try
                     {
                         cmd3.ExecuteNonQuery();
-                        
-                        
+
+
                     }
                     catch (SystemException ex)
                     {
@@ -420,13 +454,10 @@ namespace Projeto1.Models.MSSQL
                     }
                     finally
                     {
-                        cmd2.Dispose();
+                        cmd3.Dispose();
                     }
                 }
-               
-               
-                ;
-                
+
             }
             catch (SqlException e)
             {
@@ -448,6 +479,17 @@ namespace Projeto1.Models.MSSQL
      
 
             return pedido;
+        }
+
+        private ModOfereceProduto read_Oferece(MySqlDataReader reader)
+        {
+            ModOfereceProduto o = new ModOfereceProduto();
+            o.codigoOferece = ConvertReader.ConverteInt(reader["codigooferece"]);
+            o.valor = ConvertReader.ConverteDouble(reader["valor"]);
+
+            o.produto = read_Produto(reader);
+
+            return o;
         }
 
         private ModProduto read_Produto(MySqlDataReader reader)

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<form class="form-horizontal" action="@Url.Action("logadoCliente","login")">
+<form class="form-horizontal" action="@Url.Action("AdmLogin","login")">
     <div class="control-group">
         <label class="control-label" for="inputEmail">Login</label>
         <div class="controls">
@@ -19,12 +19,21 @@
         </div>
        
     </div>
+    <div class="form-group">
+        <div class="col-md-1 ">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="item"> Empresa
+                </label>
+            </div>
+        </div>
+    </div>
     <div class="control-group">
         <div class="controls">
-            <br />
+           
 
             
-            <button class="btn btn-default" type="submit">Acessar</button>
+            <button class="btn btn-primary" type="submit">Acessar</button>
         </div>
     </div>
 </form>

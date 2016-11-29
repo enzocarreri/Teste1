@@ -13,6 +13,11 @@ namespace Projeto1.Controllers
         // GET: ListarItem
         public ActionResult ListarItem()
         {
+            
+            //if(1==1)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             string login = Request.QueryString["login"];
             string senha = Request.QueryString["senha"];
             string codigoEmpresa = Request.QueryString["item"];

@@ -17,12 +17,15 @@ namespace Projeto1.Models
 
         public ModProduto produto { get; set; }
 
+        public ModOfereceProduto oferece { get; set; }
+
         public int contagemVenda { get; set; }
 
         public ModItensPedidos()
         {
             pedido = new ModPedido();
             produto = new ModProduto();
+            oferece = new ModOfereceProduto();
         }
     }
 }

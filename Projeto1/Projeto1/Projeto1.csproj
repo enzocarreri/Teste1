@@ -213,6 +213,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Imagens\a.jpg" />
+    <Content Include="Content\Imagens\b.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -223,6 +225,7 @@
     <Content Include="Content\Imagens\cap2.JPG" />
     <Content Include="Content\Imagens\Fotolia_84805682_Subscription_Monthly_M.jpg" />
     <Content Include="Content\Imagens\risos2.png" />
+    <Content Include="Content\Imagens\teste.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -303,7 +306,9 @@
     <Content Include="Views\Login\LoginCliente.cshtml" />
     <Content Include="Views\LoginPedido\LoginCliPedido.cshtml" />
     <Content Include="Views\Pedido\LocalEntrega.cshtml" />
-    <Content Include="Views\Pedido\Sugestao.cshtml" />
+    <Content Include="Views\Pedido\SugestaoSobre.cshtml" />
+    <Content Include="Views\Pedido\SugestaoBebida.cshtml" />
+    <Content Include="Views\ListarItem\VisualAntigo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,34 +15,45 @@ namespace Projeto1.Controllers
         {
             return View();
         }
-        public ActionResult LoginEmpresa()
-        {
-            return View();
-        }
+       
         public ActionResult LoginCliente()
         {
             return View();
         }
-
-        public ActionResult LogadoCliente()
+        public ActionResult AdmLogin()
         {
             string login = Request.QueryString["login"];
             string senha = Request.QueryString["senha"];
+            string selecionado = Request.QueryString["item"];
+            if(String.IsNullOrEmpty(selecionado))
+            {
+                return RedirectToAction("logadoCliente", "Login", new { loginP = login, senhaP = senha});
+            }
+            else
+            {
+                return RedirectToAction("logadoEmpresa", "Login", new { loginP = login, senhaP = senha});
+            }
+            return View();
+        }
+        public ActionResult LogadoCliente(string loginP,string senhaP)
+        {
+            //string login = Request.QueryString["login"];
+            //string senha = Request.QueryString["senha"];
             LoginDAO dao = new LoginDAO();
-            ViewBag.login = login;
-            ViewBag.senha = senha;
-            List<ModItensPedidos> ped = dao.ListarPedidosCliente(login, senha);
+            ViewBag.login = loginP;
+            ViewBag.senha = senhaP;
+            List<ModItensPedidos> ped = dao.ListarPedidosCliente(loginP, senhaP);
             return View(ped);
         }
 
-        public ActionResult LogadoEmpresa()
+        public ActionResult LogadoEmpresa(string loginP, string senhaP)
         {
-            string login = Request.QueryString["login"];
-            string senha = Request.QueryString["senha"];
+            //string login = Request.QueryString["login"];
+            //string senha = Request.QueryString["senha"];
             LoginDAO dao = new LoginDAO();
-            ViewBag.login = login;
-            ViewBag.senha = senha;
-            List<ModItensPedidos> ped = dao.ListarPedidosEmpresa(login,senha);
+            ViewBag.login = loginP;
+            ViewBag.senha = senhaP;
+            List<ModItensPedidos> ped = dao.ListarPedidosEmpresa(loginP,senhaP);
            return View(ped);
 
 

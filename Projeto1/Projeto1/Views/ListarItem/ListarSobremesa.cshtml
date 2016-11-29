@@ -8,38 +8,49 @@
 
 
 
+
+<fieldset data-role="controlgroup">
     @foreach (Projeto1.Models.ModOfereceProduto item in Model)
     {
         <div class="col-md-6">
-            <div class="panel-heading" role="tab" id="headingOne">
+            <div class="row">
 
+                <div class="chipSobreBebi">
 
-                <a id=@item.produto.codigoProduto class="list-group-item collapsed">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <label>Nome: </label>@item.produto.nomeProduto <br />
+                    <img src="~/Content/Imagens/teste.jpg" alt="Person" width="96" height="96">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <b>Prato:</b> @item.produto.nomeProduto<br />
+                            </div>
+                            <div class="col-md-1">
+                                <div class="item">
+                                    <input type="checkbox" name="item" class="item-checkbox" value="@item.produto.codigoProduto" id="@item.produto.codigoProduto">
+                                    <label class="item-label" for="@item.produto.codigoProduto">
+                                        <span class="item-inner"></span>
+                                        <span class="item-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-8">
+                                <b>Valor: </b> @item.valor <br />
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Tipo: </label>@item.produto.tipoProduto.descricao <br />
-                        </div>
-                        <div class="col-md-4">
-                            <label>Valor: </label>@item.valor <br />
-                        </div>
 
 
-                        <div class="col-md-2">
-                            <input type="checkbox" name="item" value="@item.produto.codigoProduto">
-
-                        </div>
-                    </div>
-                </a>
-
+                </div>
             </div>
-
         </div>
 
+
+        <br /><br />
+
+
     }
+    <br /><br /><br /><br />
+</fieldset>
+

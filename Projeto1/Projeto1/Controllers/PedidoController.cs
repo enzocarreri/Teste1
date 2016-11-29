@@ -63,7 +63,7 @@ namespace Projeto1.Controllers
             PedidoDAO dao = new PedidoDAO();
 
             List<ModItensPedidos> sug = dao.SugestaoBebida(mistura);
-            return PartialView(sug);
+            return View(sug);
 
         }
 
@@ -75,6 +75,10 @@ namespace Projeto1.Controllers
             string endereco = Request.QueryString["endereco"];
             string numero = Request.QueryString["numero"];
             string valorUni = Request.QueryString["valor"];
+            string codBeb1 = Request.QueryString["codBeb1"];
+            string valBeb1 = Request.QueryString["valorBeb1"];
+            string codSobre1 = Request.QueryString["codSobre1"];
+            string valorSobre1 = Request.QueryString["valorSobre1"];
             string pedido = null;
             string valor = null;
 
@@ -82,13 +86,17 @@ namespace Projeto1.Controllers
             valor = valorUni.Replace(",", "");
 
             PedidoDAO dao = new PedidoDAO();
-
-            string ao = dao.FinalizarPedido(pedido,cliente,endereco,numero,valor);
+                      
+            string ao = dao.FinalizarPedido(pedido, cliente, endereco, numero, valor,codBeb1,valBeb1,codSobre1,valorSobre1);
 
 
             ViewBag.nome = selecionado;
             ViewBag.nome2 = ao;
             ViewBag.cliente = cliente;
+            ViewBag.lala1 = codBeb1;
+            ViewBag.lala2 = valBeb1;
+            ViewBag.lala3 = codSobre1;
+            ViewBag.lala4 = valorSobre1;
             return View();
 
         }

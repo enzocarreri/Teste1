@@ -16,7 +16,6 @@ namespace Aprendendo.Models.MSSQL
 
         private string ConexaoWebConfig = "MySql";
         private string Server = "localhost";
-
         private string Database = "pedefacil";
         private string Usuario = "teste";
         private string Senha = "teste";
