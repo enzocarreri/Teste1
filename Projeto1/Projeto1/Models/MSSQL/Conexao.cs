@@ -14,11 +14,16 @@ namespace Aprendendo.Models.MSSQL
         public string mErro = "";
 
 
+        //private string ConexaoWebConfig = "MySql";
+        //private string Server = "localhost";
+        //private string Database = "pedefacil";
+        //private string Usuario = "teste";
+        //private string Senha = "teste";
         private string ConexaoWebConfig = "MySql";
-        private string Server = "localhost";
-        private string Database = "pedefacil";
-        private string Usuario = "teste";
-        private string Senha = "teste";
+        private string Server = "br-cdbr-azure-south-b.cloudapp.net";
+        private string Database = "pedefacil123";
+        private string Usuario = "bb292d3c966033";
+        private string Senha = "d9ef13e8";
         public MySqlConnection conn;
 
         public Conexao(TipoConexao.Conexao TConexao)
