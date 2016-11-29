@@ -19,7 +19,7 @@ namespace Aprendendo.Models.MSSQL
         //private string Database = "pedefacil";
         //private string Usuario = "teste";
         //private string Senha = "teste";
-        //private string ConexaoWebConfig = "MySql";
+        private string ConexaoWebConfig = "MySql";
         private string Server = "br-cdbr-azure-south-b.cloudapp.net";
         private string Database = "pedefacil123";
         private string Usuario = "bb292d3c966033";
