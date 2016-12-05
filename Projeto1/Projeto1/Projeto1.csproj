@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\CidadeController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\SelecionarCidadeController.cs" />
+    <Compile Include="Controllers\SugestaoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,7 +202,9 @@
     <Compile Include="Models\ModOfereceProduto.cs" />
     <Compile Include="Models\ModPedido.cs" />
     <Compile Include="Models\ModProduto.cs" />
+    <Compile Include="Models\ModSugestao.cs" />
     <Compile Include="Models\ModTipoProduto.cs" />
+    <Compile Include="Models\MSSQL\CadastroDAO.cs" />
     <Compile Include="Models\MSSQL\CidadeDAO.cs" />
     <Compile Include="Models\MSSQL\Conexao.cs" />
     <Compile Include="Models\MSSQL\EmpresaDAO.cs" />
@@ -208,6 +212,7 @@
     <Compile Include="Models\MSSQL\ItensDAO.cs" />
     <Compile Include="Models\MSSQL\LoginDAO.cs" />
     <Compile Include="Models\MSSQL\PedidoDAO.cs" />
+    <Compile Include="Models\MSSQL\SugestaoDAO.cs" />
     <Compile Include="Models\Validacoes\ConvertReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -309,6 +314,10 @@
     <Content Include="Views\Pedido\SugestaoSobre.cshtml" />
     <Content Include="Views\Pedido\SugestaoBebida.cshtml" />
     <Content Include="Views\ListarItem\VisualAntigo.cshtml" />
+    <Content Include="Views\Cadastro\Cadastro.cshtml" />
+    <Content Include="Views\Cadastro\CadastroFinalizado.cshtml" />
+    <Content Include="Views\Sugestao\Sugestao.cshtml" />
+    <Content Include="Views\Sugestao\SugestaoFinalizada.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

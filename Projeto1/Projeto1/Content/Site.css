@@ -1,4 +1,5 @@
-﻿.field-validation-error {
+﻿
+.field-validation-error {
     color: #f00;
 }
 
@@ -22,22 +23,34 @@
 
 
 
-navbar{
-    color:#f00;
 
+
+.div-top-pag {
+    padding:10px;
+    background:#212121;
 }
+
+.div-botton-pag {
+    margin-top:5px;
+    padding:5px;
+    background:#9E9E9E;
+}
+.div-body {
+    min-height:300px;
+}
+
+.titulo-pag {
+    color:#FAFAFA;
+    padding:5px;
+}
+
+.div-menu {
+    padding:5px;
+    background:#9E9E9E;
+}
+
 a{
     cursor:pointer;
-}
-#guarnicao{
-    color:#f00;
-    font-size:18px;
-    text-align:center;
-}
-#cardapio{
-    background-image:url(~/Content/Imagens/card.jpg);
-    
-    
 }
 
 /* Animations to fade the snackbar in and out */

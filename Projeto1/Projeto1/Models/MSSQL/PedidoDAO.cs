@@ -125,8 +125,8 @@ namespace Projeto1.Models.MSSQL
                           " in (select pe.codigopedido from produto p, empresa e, tipoproduto t, itenspedido i, pedido pe, ofereceproduto o " +
                           " WHERE p.codtipoproduto = t.codigotipo and p.codigoproduto = i.codProdutopedido " +
                           " and i.coditenspedido = pe.codigopedido and o.codproduto = p.codigoproduto " +
-                          " and e.codigoempresa = o.codempresa and p.codigoProduto = '" + mistura + "' ) " +
-                          " and p.codigoProduto != '" + mistura + "' and t.codigoTipo = 4 " +
+                          " and e.codigoempresa = o.codempresa and p.codigoProduto = '"+mistura+"' ) " +
+                          " and p.codigoProduto != '"+mistura+"' and t.codigoTipo = 4 " +
                           " group by p.codigoProduto " +
                           " order by contagem desc limit 1 ";
 
@@ -200,7 +200,7 @@ namespace Projeto1.Models.MSSQL
                          " in (select pe.codigopedido from produto p, empresa e, tipoproduto t, itenspedido i, pedido pe, ofereceproduto o " +
                          " WHERE p.codtipoproduto = t.codigotipo and p.codigoproduto = i.codProdutopedido " +
                          " and i.coditenspedido = pe.codigopedido and o.codproduto = p.codigoproduto " +
-                         " and e.codigoempresa = o.codempresa and p.codigoProduto = '" + mistura +"' ) " +
+                         " and e.codigoempresa = o.codempresa and p.codigoProduto = '"+mistura+"' ) " +
                          " and p.codigoProduto != '"+mistura+"' and t.codigoTipo = 1 " +
                          " group by p.codigoProduto " +
                          " order by contagem desc limit 1 ";
